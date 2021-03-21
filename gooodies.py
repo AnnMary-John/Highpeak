@@ -1,10 +1,20 @@
-from itertools import combinations
-
 #function to find difference of maximum and minimum value
 def find_diff(l):
     a=max(l)
     b=min(l)
     return a-b
+
+# to get all combinations
+def combination(lst,n):
+    if(n==0):
+        return [[]]
+    l=[]
+    for i in range(0,len(lst)):
+        m=lst[i]
+        remlst=lst[i+1:]
+        for p in combination(remlst,n-1):
+            l.append([m]+p)
+    return l
 
 #open input file
 fi = open(r"F:\highpeak\input.txt", "r")
@@ -28,7 +38,7 @@ for i in range(4,14): # to get all goodies and prices mapped to a dictionary
     pricelist.append(int(m[1]))
 
 #get all combinations of the pricelist
-combo=list(combinations(pricelist,nemp))
+combo=combination(pricelist,nemp)
 
 minval=find_diff(combo[0])
 
